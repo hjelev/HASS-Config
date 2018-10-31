@@ -1,0 +1,49 @@
+  - platform: wake_on_lan
+    home_pc_wol:
+    mac_address: "94-DE-80-B5-F6-DB"
+    host: "192.168.0.100"
+    turn_off:
+      service: shell_command.shutdown_z800
+
+  - platform: orvibo
+    s20:
+    discovery: true
+    switches:
+      - host: 192.168.0.104
+        name: "fish pump"
+      - host: 192.168.0.114
+        name: "Kitchen motion light"
+      - host: 192.168.0.113
+        name: "Kitchen Light"
+      - host: 192.168.0.112
+        name: "tv back-light"
+
+  - platform: command_line
+    ivancho_motion:
+    switches:
+     #Switch for Foscam Motion Detection
+      foscam_motion_ivanchoroom:
+        command_on: !secret foscam_motion_ivanchoroom_on
+        command_off: !secret foscam_motion_ivanchoroom_off
+        command_state: !secret foscam_motion_ivanchoroom_state
+        value_template: '{{ value == "1" }}'
+        friendly_name: Ivancho Room Detection Status
+      bath_vent:
+        command_on: 'wget -qO- "http://192.168.0.28/control?cmd=GPIO,15,1" &> /dev/null'
+        command_off: 'wget -qO- "http://192.168.0.28/control?cmd=GPIO,15,0" &> /dev/null'
+        command_state: !secret bath_vent_state_command
+        value_template: '{{ value == "1" }}'
+        friendly_name: Bath Vent
+      pi_hole:
+        command_on: "pihole enable"
+        command_off: "pihole disable"
+        command_state: "curl -X GET 'http://192.168.0.103/admin/api.php?status'"
+        value_template: "{{ value_json.status == 'enabled' }}"
+        friendly_name: Pi-Hole Ad Blocker
+
+      # sony_tv:
+        # command_on: "echo 'on 0' | sudo cec-client -s -d 1"
+        # command_off: "echo 'standby 0' | sudo cec-client -s -d 1"
+        # command_state: "echo 'pow 0' | sudo cec-client -s -d 1 | grep power | awk '{print substr($0, length($0)-1, 3)}'"
+        # value_template: '{{ value == "on" }}'
+        # friendly_name: Sony TV 

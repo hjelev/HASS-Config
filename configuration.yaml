@@ -1,0 +1,82 @@
+homeassistant:
+  unit_system: metric
+  time_zone: Europe/Sofia
+  customize: !include customize.yaml
+  elevation: 566
+  longitude: !secret long
+  latitude: !secret lat
+  name: Home Sf
+
+frontend:
+  themes: !include_dir_merge_named themes/
+
+script: !include scripts.yaml
+group: !include groups.yaml 
+automation: !include automations.yaml
+python_script: !include_dir_merge_list python_scripts
+device_tracker: !include devicetracker.yaml
+shell_command: !include shellcommands.yaml
+mqtt: !include mqtt.yaml 
+http:
+sun:
+updater:
+
+system_log:
+  max_entries: 100
+  
+notify: !include notify.yaml
+
+map:
+zone: !include zones.yaml
+
+recorder:
+ purge_interval: 2
+ purge_keep_days: 3
+
+history: 
+config:
+
+# discovery: 
+
+input_select: !include input_select.yaml
+
+panel_iframe: !include panel_iframe.yaml
+
+binary_sensor:
+  - platform: ping
+    host: 192.168.0.28
+    count: 2
+    scan_interval: 60
+    
+sensor: !include sensors.yaml
+
+camera: !include cameras.yaml
+
+switch: !include switches.yaml
+
+light:
+  platform: yeelight
+  devices:
+    192.168.0.20:
+      name: living-room-light
+    192.168.0.21:
+      name: "Kitchen Main Light"
+    192.168.0.22:
+      name: "Living Room Light 2"
+    192.168.0.23:
+      name: "Ivancho Room Light" 
+
+media_player:
+  - platform: squeezebox
+    living_room:
+    host: 192.168.0.200
+
+  - platform: mpchc
+    living_room_pc:
+    host: http://192.168.0.100
+    port: 13579
+    name: MPC-Living-room
+
+  - platform: spotify
+    client_id: !secret spotify_client_id
+    client_secret: !secret spotify_client_secret

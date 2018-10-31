@@ -1,0 +1,101 @@
+switch.sony_tv:
+  friendly_name: Sony TV
+  icon: mdi:television
+switch.living_room_cam:
+  friendly_name: Living Room Cam
+  icon: mdi:webcam
+switch.kitchen_light:
+  friendly_name: Kitchen Light
+  icon: mdi:lightbulb-outline
+switch.tv_backlight:
+  friendly_name: TV Back-light
+  icon: mdi:lightbulb-outline
+switch.aquarium_canister:
+  friendly_name: Aquarium Canister
+  icon: mdi:water-pump
+switch.fish_pump:
+  friendly_name: Fish Air Pump
+  icon: mdi:fish
+group.default_view:
+  icon: mdi:home
+group.weather:
+  icon: mdi:cloud
+group.cameras:
+  icon: mdi:webcam
+group.multyroomaudio:
+  icon: mdi:music
+group.all_devices:
+  icon: mdi:chip
+group.airquality:
+  icon: mdi:factory
+# group.remote_cams:
+  # icon: mdi:camcorder
+switch.wake_on_lan:
+  friendly_name: Home PC
+  icon: mdi:desktop-tower
+sensor.avrg__messages_per_1_min:
+  icon: mdi:message-bulleted
+sensor.ivan_room_humidity:
+  icon: mdi:water-percent
+sensor.kitchen_hum:
+  icon: mdi:water-percent
+sensor.livingroom_humidity:
+  icon: mdi:water-percent
+group.switches2:
+  icon: mdi:dip-switch
+group.switches:
+  icon: mdi:dip-switch
+sensor.rpi_1_diskusage:
+  icon: mdi:harddisk
+sensor.rpi2_diskusage:
+  icon: mdi:harddisk
+sensor.rpi0_kitchen_diskusage:
+  icon: mdi:harddisk
+sensor.rpi0_ivancho_diskusage:
+  icon: mdi:harddisk
+sensor.rpi3_diskusage:
+  icon: mdi:harddisk
+sensor.rpi_1_cpu_load:
+  icon: mdi:chip
+sensor.rpi2_cpu:
+  icon: mdi:chip
+sensor.rpi0_kitchen_cpu:
+  icon: mdi:chip
+sensor.rpi0_ivancho_cpu:
+  icon: mdi:chip
+sensor.rpi3_cpu_load:
+  icon: mdi:chip
+automation.burglar_alarm:
+  icon: mdi:alarm-light
+  initial_state: 'off'
+automation.turn_off_kitchen_lights:
+  icon: mdi:lightbulb
+automation.turn_on_kitchen_lights:
+  icon: mdi:lightbulb-on
+group.currency:
+  icon: mdi:currency-btc
+group.bitcoins:
+  icon: mdi:currency-btc
+device_tracker.google_maps_108650450444917409685:
+  friendly_name: Google Maps - Tanya
+device_tracker.google_maps_118240125134652561295:
+  friendly_name: Google Maps - Hristo
+group.mydevices:
+  icon: mdi:chip
+switch.bath_vent:
+  icon: mdi:fan
+switch.pi_hole:
+  icon: mdi:block-helper
+sensor.tanya_battery:
+  icon: mdi:battery
+sensor.hristo_battery:
+  icon: mdi:battery
+sensor.pws_temp_c:
+  friendly_name: Outside Temperature
+sensor.dewpoint:
+  friendly_name: Kitchen Dew Point
+  icon: mdi:water
+  unit_of_measurement: °C
+sensor.vent_kitchen:
+  color: red
+  icon: mdi:information

@@ -1,0 +1,13 @@
+get_kit_img: 'wget -q -O /ram/kitchen.jpg http://192.168.0.200:8888/out.jpg'
+get_liv_img: 'wget -q -O /ram/livingroom.jpg http://192.168.0.108/snapshot.jpg'
+get_kid_img: !secret get_kid_img_cmd
+get_movie_img: 'sudo python3 /home/pi/scripts/dl.py'
+shutdown_z800: 'curl -k http://192.168.0.100:8000/?action=System.Shutdown'
+restart_z800: 'curl -k http://192.168.0.100:8000/?action=System.Restart'
+sleep_z800: 'curl -k http://192.168.0.100:8000/?action=System.Sleep'
+hibernate_z800: 'curl -k http://192.168.0.100:8000/?action=System.Hibernate'
+cam_door: !secret cam_door_cmd
+cam_bed: !secret cam_bed_cmd
+cam_play: !secret cam_play_cmd
+bath_vent_off: 'wget -qO- "http://192.168.0.28/control?cmd=GPIO,15,0" &> /dev/null'
+bath_vent_on: 'wget -qO- "http://192.168.0.28/control?cmd=GPIO,15,1" &> /dev/null'

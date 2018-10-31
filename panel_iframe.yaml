@@ -1,0 +1,24 @@
+  musicserver:
+    title: 'Music Server'
+    icon: 'mdi:music-box'
+    url: 'http://192.168.0.200:9000'
+  openvpn:
+    title: 'OpenVPN Monitor'
+    icon: 'mdi:vpn'
+    url: 'http://192.168.0.102:8000/'
+  networkstats:
+    title: 'Network Stats'
+    icon: 'mdi:network'
+    url: 'http://192.168.0.102:4001/network.html?refresh_ce'
+  supervisor:
+    title: 'Supervisor'
+    icon: 'mdi:sitemap'
+    url: 'http://192.168.0.102:9001'
+  # homepc:
+    # title: 'Home PC Stats'
+    # icon: 'mdi:desktop-classic'
+    # url: 'http://192.168.0.100:8085/'    
+  # kitchenpc:
+    # title: 'Kitchen PC Stats'
+    # icon: 'mdi:laptop'
+    # url: 'http://192.168.0.200:8085/'

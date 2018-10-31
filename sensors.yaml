@@ -1,0 +1,283 @@
+  - platform: moon
+    moon:
+  - platform: steam_online
+    api_key: !secret steam_online_api_key
+    accounts:
+      - !secret steam_online_acount_masoko
+  # Current Steam game  
+  - platform: template
+    sensors:
+      steam_game:
+        friendly_name: "Game"
+        value_template: "
+        {{ states.sensor.steam_76561198120430927.attributes.game |default('off') }}"
+        
+  - platform: template
+    sensors:
+      dewpoint:
+        value_template: "{{ (states.sensor.kitchen_temp.state | float - ((100 - states.sensor.kitchen_hum.state | float) / 5)) | round(2) }}"
+  - platform: template
+    sensors:
+      hristo_battery:
+        friendly_name: "Hristo Phone Battery"
+        unit_of_measurement: "%"
+        value_template: "{{ states.device_tracker.google_maps_118240125134652561295.attributes.battery_level }}"
+
+  - platform: template
+    sensors:
+      tanya_battery:
+        friendly_name: "Tanya Phone Battery"
+        unit_of_measurement: "%"
+        value_template: "{{ states.device_tracker.google_maps_108650450444917409685.attributes.battery_level }}"
+
+  - platform: gearbest
+    currency: USD
+    items:
+      - url: https://www.gearbest.com/mini-pc/pp_009199662726.html?wid=1433363
+        name: Beelink Gemini X55 Ultimate MINIPC - BLACK EU
+        currency: USD
+  - platform: wunderground
+    api_key: !secret wunderground_api_key
+    monitored_conditions:
+      - temp_high_record_c
+      - temp_high_1d_c
+      - temp_c
+      - temp_low_1d_c
+      - temp_low_record_c
+      - precip_1d
+      - precip_1d_mm
+      - wind_kph
+      - wind_1d_kph
+      - alerts
+      - relative_humidity
+      - dewpoint_c
+  # - platform: miflora
+    # mac: 'C4:7C:8D:61:B5:8C'
+    # name: Living Room Flower
+    # force_update: false
+    # median: 3
+    # monitored_conditions:
+      # - moisture
+      # - light
+      # - temperature
+      # - conductivity
+      # - battery
+
+  # - platform: miflora
+    # mac: 'C4:7C:8D:62:0B:6A'
+    # name: Aloe Vera
+    # force_update: false
+    # median: 3
+    # monitored_conditions:
+      # - moisture
+      # - light
+      # - temperature
+      # - conductivity
+      # - battery
+
+  - platform: bitcoin
+    display_options:
+      - exchangerate
+      - trade_volume_btc
+  - platform: template
+    sensors:
+      vent_kitchen:
+        friendly_name: "Vent Kitchen"
+        value_template: >-
+          {% if states.sensor.dewpoint.state|float < states.sensor.pws_dewpoint_c.state|float %}
+             Don't Vent
+          {% elif states.sensor.kitchen_hum.state|float > 75 %}
+            Have to vent!
+          {% elif states.sensor.dewpoint.state|float > states.sensor.pws_dewpoint_c.state|float %}
+            Its OK to vent
+          {% endif %}
+
+  - platform: mqtt
+    state_topic: "ivanchoroom/temperature"
+    name: Ivancho room temperature
+    unit_of_measurement: "°C"
+
+  - platform: mqtt
+    state_topic: "ivanchoroom/humidity"
+    name: Ivan room humidity
+    unit_of_measurement: "%" 
+
+  - platform: mqtt
+    state_topic: "livingroom/temperature"
+    name: livingroom temperature
+    unit_of_measurement: "°C"
+  - platform: mqtt
+    state_topic: "livingroom/humidity"
+    name: livingroom humidity
+    unit_of_measurement: "%"
+
+  - platform: mqtt
+    state_topic: "masoko/kitchen/Temperature"
+    name: kitchen temp
+    unit_of_measurement: "°C"
+ #   value_template: '{{ value_json.Temperature }}'
+
+  - platform: mqtt
+    state_topic: "masoko/kitchen/Humidity"
+    name: kitchen hum
+    unit_of_measurement: "%"
+ #   value_template: '{{ value_json.Humidity }}'
+
+  - platform: mqtt
+    state_topic: "masoko/kitchen-motion/state"
+    name: kitchen motion
+
+  - platform: mqtt
+    state_topic: "masoko/livingroom-motion/state"
+    name: livingroom motion
+
+  - platform: mqtt
+    state_topic: "masoko/livingroom/motion"
+    name: livingroom cam motion
+
+  - platform: mqtt
+    state_topic: "$SYS/broker/load/publish/received/5min"
+    name: avrg.  messages per 1 min
+    unit_of_measurement: "msg"
+
+  - platform: luftdaten
+    sensorid: 5690
+    name: Air Polution Sofia
+    monitored_conditions:
+      - P1
+      - P2
+  - platform: luftdaten
+    sensorid: 6320
+    name: Air Polution SZ
+    monitored_conditions:
+      - P1
+      - P2
+
+  - platform: mqtt
+    state_topic: "masoko/rpi1/cpuload"
+    name: rpi 1 cpu load
+    unit_of_measurement: "%"
+
+  - platform: mqtt
+    state_topic: "masoko/rpi1/cputemp"
+    name: rpi 1 cpu temp
+    unit_of_measurement: "°C"
+
+  - platform: mqtt
+    state_topic: "masoko/rpi0-2/cpuload"
+    name: Rpi0 Ivancho cpu
+    unit_of_measurement: "%"
+
+  - platform: mqtt
+    state_topic: "masoko/rpi0-2/cputemp"
+    name: Rpi0 Ivancho cpu temp
+    unit_of_measurement: "°C"
+
+  - platform: mqtt
+    state_topic: "masoko/rpi0-1/cpuload"
+    name: Rpi0 kitchen cpu
+    unit_of_measurement: "%"
+
+  - platform: mqtt
+    state_topic: "masoko/rpi0-1/cputemp"
+    name: Rpi0 kitchen cpu temp
+    unit_of_measurement: "°C"
+
+  - platform: mqtt
+    state_topic: "masoko/rpi2/cpuload"
+    name: Rpi2 cpu
+    unit_of_measurement: "%"
+
+  - platform: mqtt
+    state_topic: "masoko/rpi2/cputemp"
+    name: Rpi2 cpu temp
+    unit_of_measurement: "°C"
+
+  - platform: mqtt
+    state_topic: "masoko/rpi3/cpuload"
+    name: RPi3 CPU Load
+    unit_of_measurement: "%"
+
+  - platform: mqtt
+    state_topic: "masoko/rpi3/cputemp"
+    name: RPi3 CPU Temp
+    unit_of_measurement: "°C"
+
+  - platform: mqtt
+    state_topic: "masoko/rpi1/diskusage"
+    name: rpi 1 diskusage
+    unit_of_measurement: "%"
+
+  - platform: mqtt
+    state_topic: "masoko/rpi0w/cpuload"
+    name: Rpi0w CPU Load
+    unit_of_measurement: "%"
+
+  - platform: mqtt
+    state_topic: "masoko/rpi0w/cputemp"
+    name: Rpi0w CPU Temp
+    unit_of_measurement: "°C"
+
+  - platform: mqtt
+    state_topic: "masoko/rpi0w/diskusage"
+    name: Rpi0w diskusage
+    unit_of_measurement: "%"
+
+  - platform: mqtt
+    state_topic: "masoko/rpi0-2/diskusage"
+    name: Rpi0 Ivancho diskusage
+    unit_of_measurement: "%"
+
+  - platform: mqtt
+    state_topic: "masoko/rpi0-1/diskusage"
+    name: Rpi0 kitchen diskusage
+    unit_of_measurement: "%"
+
+  - platform: mqtt
+    state_topic: "masoko/rpi2/diskusage"
+    name: Rpi2 diskusage
+    unit_of_measurement: "%"
+
+  - platform: mqtt
+    state_topic: "masoko/rpi3/diskusage"
+    name: RPi3 diskusage
+    unit_of_measurement: "%" 
+
+  - platform: command_line
+    command: "/usr/bin/python /home/pi/scripts/rcontrol.py"
+    name: Home Alarm
+    scan_interval: 120
+    
+  - platform: command_line
+    name: Ivancho Room Motion
+    command: !secret ivancho_room_motion_command
+    value_template: '{{ value == "2" }}'
+    scan_interval: 10
+# Home PC sensors    
+  - platform: mqtt
+    name: 'hpc CPU Temp'
+    state_topic: '/homepc/telemetry'
+    qos: 0
+    value_template: '{{ value_json.cputemp | float}}'
+    unit_of_measurement: "°C"
+
+  - platform: mqtt
+    name: 'hpc CPU Usage'
+    state_topic: '/homepc/telemetry'
+    qos: 0
+    value_template: '{{ value_json.cpuusage | float}}'
+    unit_of_measurement: "%"
+
+  - platform: mqtt
+    name: 'hpc Used Memory'
+    state_topic: '/homepc/telemetry'
+    qos: 0
+    value_template: '{{ value_json.usedmemory | float}}'
+    unit_of_measurement: "MB"
+
+  - platform: mqtt
+    name: 'hpc Free Memory'
+    state_topic: '/homepc/telemetry'
+    qos: 0
+    value_template: '{{ value_json.freememory | float}}'
+    unit_of_measurement: "MB"

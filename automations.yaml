@@ -1,0 +1,441 @@
+- id: a
+  alias: Turn on tv backlight when sun sets
+  trigger:
+    platform: sun
+    event: sunset
+    offset: -01:00:00
+  action:
+    service: switch.turn_on
+    entity_id: group.tvbacklight
+- id: b
+  alias: Turn on kitchen lights
+  trigger:
+    platform: mqtt
+    topic: masoko/kitchen-motion/state
+    payload: '1'
+  condition:
+    condition: sun
+    after: sunset
+    after_offset: -00:50:00
+  action:
+  - service: switch.turn_on
+    entity_id: switch.kitchen_light
+  - service: light.turn_on
+    data:
+      entity_id: light.kitchen_main_light
+      transition: 2
+- id: b1
+  alias: Turn on kitchen lights after midnight
+  trigger:
+    platform: mqtt
+    topic: masoko/kitchen-motion/state
+    payload: '1'
+  condition:
+    condition: sun
+    before: sunrise
+    before_offset: 00:10:00
+  action:
+  - service: switch.turn_on
+    entity_id: switch.kitchen_light
+  - service: light.turn_on
+    data:
+      entity_id: light.kitchen_main_light
+      transition: 2
+- id: c
+  alias: Turn off kitchen lights
+  trigger:
+    platform: mqtt
+    topic: masoko/kitchen-motion/state
+    payload: '0'
+  condition:
+    condition: state
+    entity_id: sensor.kitchen_motion
+    state: '0'
+    for:
+      minutes: 5
+  action:
+  - service: switch.turn_off
+    entity_id: switch.kitchen_light
+- id: d
+  alias: Burglar Alarm
+  trigger:
+  - payload: '1'
+    platform: mqtt
+    topic: masoko/kitchen-motion/state
+  - payload: '1'
+    platform: mqtt
+    topic: masoko/livingroom-motion/state
+  action:
+  - service: shell_command.get_kit_img
+  - service: shell_command.get_liv_img
+  - service: shell_command.get_kid_img
+  - delay:
+      seconds: 1
+  - data:
+      data:
+        images:
+        - /ram/kitchen.jpg
+        - /ram/livingroom.jpg
+        - /ram/ivancho.jpg
+      message: Intruder alert at kitchen!!
+      title: Intruder alert
+    service: notify.NOTIFIER_NAME
+  - entity_id: switch.kitchen_light
+    service: switch.turn_on
+- action:
+  - data:
+      entity_id: automation.turn_on_kitchen_lights
+    service: automation.turn_off
+  - data:
+      entity_id: automation.turn_on_kitchen_lights_after_midnight
+    service: automation.turn_off
+  - data:
+      entity_id: automation.burglar_alarm
+    service: automation.turn_on
+  - data: {}
+    service: shell_command.cam_door
+  alias: Auto Photo Alarm Arm ON
+  condition: []
+  id: '1512730024376'
+  trigger:
+  - entity_id: sensor.home_alarm
+    from: 'Off'
+    platform: state
+    to: 'On'
+- action:
+  - data:
+      entity_id: automation.turn_on_kitchen_lights
+    service: automation.turn_on
+  - data:
+      entity_id: automation.turn_on_kitchen_lights_after_midnight
+    service: automation.turn_on
+  - data:
+      entity_id: automation.burglar_alarm
+    service: automation.turn_off
+  - data: {}
+    service: shell_command.cam_play
+  alias: Auto Photo Alarm Arm OFF
+  condition: []
+  id: '1512730388127'
+  trigger:
+  - entity_id: sensor.home_alarm
+    from: 'On'
+    platform: state
+    to: 'Off'
+- id: e
+  alias: Movie Poster
+  trigger:
+  - platform: state
+    entity_id: media_player.mpclivingroom
+  action:
+  - service: shell_command.get_movie_img
+- id: f
+  alias: z800_restart
+  trigger:
+  - platform: state
+    entity_id: input_select.pcoptions
+    to: Restart
+  action:
+  - service: shell_command.restart_z800
+- id: f1
+  alias: z800_shutdown
+  trigger:
+  - platform: state
+    entity_id: input_select.pcoptions
+    to: Shutdown
+  action:
+  - service: shell_command.shutdown_z800
+- id: f2
+  alias: z800_sleep
+  trigger:
+  - platform: state
+    entity_id: input_select.pcoptions
+    to: Sleep
+  action:
+  - service: shell_command.sleep_z800
+- id: f3
+  alias: z800_hibernate
+  trigger:
+  - platform: state
+    entity_id: input_select.pcoptions
+    to: Hibernate
+  action:
+  - service: shell_command.hibernate_z800
+- id: f4
+  alias: cam_bed
+  trigger:
+  - platform: state
+    entity_id: input_select.ivancho_cam
+    to: Bed
+  action:
+  - service: shell_command.cam_bed
+- id: f5
+  alias: cam_door
+  trigger:
+  - platform: state
+    entity_id: input_select.ivancho_cam
+    to: Door
+  action:
+  - service: shell_command.cam_door
+- id: f6
+  alias: cam_play
+  trigger:
+  - platform: state
+    entity_id: input_select.ivancho_cam
+    to: Play
+  action:
+  - service: shell_command.cam_play
+- action:
+  - service: shell_command.cam_bed
+  alias: Ivancho Cam - show bed after sunset
+  condition:
+  - condition: state
+    entity_id: sensor.home_alarm
+    state: 'Off'
+  id: '1521022835738'
+  trigger:
+  - event: sunset
+    offset: 03:30:00
+    platform: sun
+- action:
+  - service: shell_command.cam_play
+  alias: Ivancho Cam - sunrise play
+  condition:
+  - condition: state
+    entity_id: sensor.home_alarm
+    state: 'Off'
+  id: '1521023478419'
+  trigger:
+  - event: sunrise
+    offset: 01:00:00
+    platform: sun
+- action:
+  - service: shell_command.cam_bed
+  alias: ivancho room light off cam
+  condition:
+  - after: sunset
+    condition: sun
+  id: '1521033428239'
+  trigger:
+  - entity_id: light.ivancho_room_light
+    platform: state
+    to: unavailable
+- action:
+  - service: shell_command.cam_play
+  alias: Ivancho Cam - light on
+  condition: []
+  id: '1521033566528'
+  trigger:
+  - entity_id: light.ivancho_room_light
+    platform: state
+    to: 'on'
+- id: '1539943397383'
+  alias: bath_vent_auto_on
+  trigger:
+  - entity_id: binary_sensor.ping_binary_sensor
+    from: 'off'
+    platform: state
+    to: 'on'
+  condition:
+  - after: '6:00'
+    before: '22:00'
+    condition: time
+  action:
+  - service: shell_command.bath_vent_on
+- id: '1540024316569'
+  alias: Turn off Bath Vent
+  trigger:
+  - platform: state
+    entity_id: switch.bath_vent
+    to: 'on'
+    for:
+      minutes: '90'
+  action:
+  - service: shell_command.bath_vent_off
+- id: '1540325534681'
+  alias: Stop music when movie starts livingroom
+  trigger:
+  - entity_id: media_player.mpclivingroom
+    platform: state
+    to: playing
+  - entity_id: sensor.steam_game
+    from: 'off'
+    platform: state
+  condition: []
+  action:
+  - entity_id: media_player.living_room
+    service: media_player.turn_off
+- id: '1540325534689'
+  alias: Start music when movie stops livingroom
+  trigger:
+  - entity_id: media_player.mpclivingroom
+    platform: state
+    to: idle
+  - entity_id: media_player.mpclivingroom
+    platform: state
+    to: paused
+  - entity_id: sensor.steam_game
+    to: None
+    platform: state
+  condition: []
+  action:
+  - entity_id: media_player.living_room
+    service: media_player.turn_on
+- id: '1540315524689'
+  alias: Play Jazz FM BG
+  trigger:
+  - platform: state
+    entity_id: input_select.radio_select
+    to: Jazz FM
+  action:
+  - service: media_player.play_media
+    data:
+      entity_id: media_player.kitchen
+      media_content_id: http://live.btvradio.bg/jazz-fm.mp3
+      media_content_type: audio/mp3
+- id: '1540315524689'
+  alias: Play Radio Nula
+  trigger:
+  - platform: state
+    entity_id: input_select.radio_select
+    to: Radio Nula
+  action:
+  - service: media_player.play_media
+    data:
+      entity_id: media_player.kitchen
+      media_content_id: http://streaming.radionula.com:8800/classics
+      media_content_type: audio/mp3
+- id: '1540315524689'
+  alias: Play Radio Gaia
+  trigger:
+  - platform: state
+    entity_id: input_select.radio_select
+    to: Radio Gaia
+  action:
+  - service: media_player.play_media
+    data:
+      entity_id: media_player.kitchen
+      media_content_id: http://sc-radiogaia.1.fm:10036
+      media_content_type: audio/mp3
+- id: '1240315524689'
+  alias: Play Red Wine Over Diner
+  trigger:
+  - platform: state
+    entity_id: input_select.spotify_select
+    to: Spotify - Red Wine Over Diner
+  action:
+  - service: media_player.play_media
+    data:
+      entity_id: media_player.kitchen
+      media_content_id: spotify:user:118614068:playlist:55TJGpxwxaBfYiIzKXcRW8
+      media_content_type: audio/mp3
+- id: '1240315524680'
+  alias: Play Discover Weekly
+  trigger:
+  - platform: state
+    entity_id: input_select.spotify_select
+    to: Spotify - Discover Weekly
+  action:
+  - service: media_player.play_media
+    data:
+      entity_id: media_player.kitchen
+      media_content_id: spotify:user:118614068:playlist:37i9dQZEVXcE4eNXPY7TMU
+      media_content_type: audio/mp3
+- id: '1240315524680'
+  alias: Play Morning Motivation
+  trigger:
+  - platform: state
+    entity_id: input_select.spotify_select
+    to: Spotify - Morning Motivation
+  action:
+  - service: media_player.play_media
+    data:
+      entity_id: media_player.kitchen
+      media_content_id: spotify:user:118614068:playlist:37i9dQZF1DXc5e2bJhV6pu
+      media_content_type: audio/mp3
+- id: '1240215524680'
+  alias: Play My Shazam Tracks
+  trigger:
+  - platform: state
+    entity_id: input_select.spotify_select
+    to: Spotify - My Shazam Tracks
+  action:
+  - service: media_player.play_media
+    data:
+      entity_id: media_player.kitchen
+      media_content_id: spotify:user:118614068:playlist:7vbCvtZKygwnNysoOFAPFv
+      media_content_type: audio/mp3
+- id: '1540330101460'
+  alias: Good Morning Music
+  trigger:
+  - at: 07:30
+    platform: time
+  condition: []
+  action:
+  - data:
+      entity_id: media_player.kitchen
+      media_content_id: spotify:user:118614068:playlist:37i9dQZF1DXc5e2bJhV6pu
+      media_content_type: audio/mp3
+    service: media_player.play_media
+- id: '1140331101460'
+  alias: Dinner Music
+  trigger:
+  - at: '19:30:00'
+    platform: time
+  condition: []
+  action:
+  - data:
+      entity_id: media_player.kitchen
+      media_content_id: spotify:user:118614068:playlist:55TJGpxwxaBfYiIzKXcRW8
+      media_content_type: audio/mp3
+    service: media_player.play_media
+- id: '1541330101461'
+  alias: Good Night Music
+  trigger:
+  - at: 00:00
+    platform: time
+  condition: []
+  action:
+  - data:
+      entity_id: media_player.kitchen
+      media_content_id: spotify:user:spotify:playlist:37i9dQZF1DWStLt4f1zJ6I
+      media_content_type: audio/mp3
+    service: media_player.play_media
+- id: '1243430101461'
+  alias: Get Ungrouped Entities On Start
+  hide_entity: true
+  trigger:
+    platform: homeassistant
+    event: start
+  action:
+    service: python_script.populate_catchall_group
+    data:
+      domains_to_ignore: zone,group,automation,zwave
+      target_group: group.catchall
+- id: '1540558116811'
+  alias: Turn off bath vent switch when power off
+  trigger:
+  - entity_id: binary_sensor.ping_binary_sensor
+    from: 'on'
+    platform: state
+    to: 'off'
+  condition: []
+  action:
+  - service: mqtt.publish
+    data_template:
+      topic: masoko/DHT-Bath/Switch
+      payload: '0'
+      retain: true
+- id: '1540937575881'
+  alias: Hass Start Alarm State
+  trigger:
+  - event: start
+    platform: homeassistant
+  condition:
+  - condition: state
+    entity_id: sensor.home_alarm
+    state: 'Off'
+  action:
+  - service: automation.turn_off
+    data:
+      entity_id: automation.burglar_alarm

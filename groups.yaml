@@ -1,0 +1,402 @@
+weather_overview:
+  name: Weather overview
+  entities:
+    - sensor.pws_weather_1d_metric
+    - sensor.pws_temp_high_record_c
+    - sensor.pws_temp_high_1d_c
+    - sensor.pws_temp_c
+    - sensor.pws_temp_low_1d_c
+    - sensor.pws_temp_low_record_c
+    - sensor.pws_precip_1d
+    - sensor.pws_precip_1d_mm
+    - sensor.pws_wind_kph
+    - sensor.pws_wind_1d_kph
+    - sensor.pws_alerts
+
+flower1:
+  view: no
+  name: Dracena
+  entities:
+    - sensor.living_room_flower_battery
+    - sensor.living_room_flower_conductivity
+    - sensor.living_room_flower_light_intensity
+    - sensor.living_room_flower_moisture
+    - sensor.living_room_flower_temperature
+
+flower2:
+  view: no
+  name: Aloe Vera
+  entities:
+    - sensor.aloe_vera_battery
+    - sensor.aloe_vera_conductivity
+    - sensor.aloe_vera_light_intensity
+    - sensor.aloe_vera_moisture
+    - sensor.aloe_vera_temperature
+
+camera_ivancho:
+  view: no
+  name: Camera Ivancho
+  entities:
+    - camera.ivancho_camera
+    - input_select.ivancho_cam
+
+cameras:
+  view: yes
+  name: Cameras
+  entities:
+    - switch.living_room_cam
+    - camera.camera_door
+    - camera.camera_living_room
+    - group.camera_ivancho
+    - camera.ivancho_sz
+    - camera.kitchen_cam 
+    - camera.home_pc
+
+# remote_cams:
+  # view: yes
+  # name: Remote Cameras
+  # entities:
+    # - camera.burgas_dock
+    # - camera.burgas_beach
+    # - camera.varna_street
+    # - camera.vlast_beach
+    # - camera.kiten
+    # - camera.gabrovo_street
+    # - camera.musala 
+
+air-quality-sf:
+  name: Air Quality SF
+  entities:
+    - sensor.air_polution_sofia_pm10
+    - sensor.air_polution_sofia_pm25
+
+air-quality-sz:
+  name: Air Quality SZ
+  entities:
+    - sensor.air_polution_sz_pm10
+    - sensor.air_polution_sz_pm25
+
+
+air-quality:
+  name: Air Quality
+#  view: yes
+  entities:
+    - group.airqualitysf
+    - group.airqualitysz
+
+
+dht22-kitchen:
+  name: DHT22 Kitchen
+  entities:
+    - sensor.kitchen_temp
+    - sensor.kitchen_hum 
+
+dht22-livingroom:
+  name: DHT22 Living room
+  entities:
+    - sensor.livingroom_temperature
+    - sensor.livingroom_humidity 
+
+dht11-ivanchoroom:
+  name: DHT11 Ivancho room
+  entities:
+    - sensor.ivancho_room_temperature
+    - sensor.ivan_room_humidity 
+
+kitchen:
+  view: yes
+  name: Kitchen
+  entities:
+    - group.dht22kitchen
+    - media_player.kitchen
+    - camera.kitchen_cam
+    - sensor.rpi_1_cpu_temp
+    - sensor.kitchen_pc_cpu_load
+    - sensor.kitchen_pc_cpu_temp
+    - sensor.rpi0_kitchen
+    - switch.kitchen_light
+    - light.kitchen_main_light
+    - sensor.kitchen_light_status 
+    - sensor.kitchen_motion
+    - automation.turn_off_kitchen_lights
+    - automation.burglar_alarm
+
+mqtt_srv:
+#  view: yes
+  name: mqtt stats
+  entities:
+    - sensor.avrg__messages_per_1_min
+
+ivancho_room:
+  view: yes
+  name: Ivancho Room
+  entities:
+    - group.dht11ivanchoroom
+    - media_player.ivanchoroom
+    - group.camera_ivancho
+    - sensor.rpi0_ivancho_cpu
+    - sensor.rpi0_ivancho_cpu_temp
+    - light.ivancho_room_light
+    - group.ivan_motion
+
+living_room:
+  view: yes
+  name: Livingroom
+  entities:
+    - group.dht22livingroom
+    - media_player.living_room
+    - camera.camera_living_room
+    - switch.tv_backlight
+    - switch.fish_pump
+    - switch.living_room_cam
+    - switch.sony_tv
+    - switch.tv_backlight
+    - switch.aquarium_canister
+    - sensor.rpi2
+    - sensor.rpi3_cpu_temp
+    - sensor.rpi3_cpu_load
+    - sensor.main_pc_cpu_load
+    - sensor.main_pc_cpu_temp
+    - sensor.main_pc_gpu_load
+    - sensor.main_pc_gpu_temp
+    - light.livingroomlight
+    - light.living_room_light_2
+    - switch.wake_on_lan 
+    - sensor.livingroom_motion
+    - sensor.livingroom_cam_motion
+    - group.flower1
+    - group.flower2
+    - group.home_pc
+
+home_pc:
+  view: no
+  name: Home PC
+  entities:
+    - sensor.hpc_cpu_temp
+    - sensor.hpc_cpu_usage
+    - sensor.hpc_free_memory
+    - sensor.hpc_used_memory
+    - camera.homepc
+    - switch.wake_on_lan
+    
+tvbacklight:
+  name: Living Room Light
+  entities:
+    - switch.tv_backlight 
+
+weblinks:
+  name: Links
+  entities:
+    - weblink.ad_blocker
+    - weblink.media_server
+    - weblink.mi_router
+    - weblink.tp_link_router 
+
+switches:
+  view: yes
+  name: Switches
+  entities:
+    - switch.fish_pump
+    - switch.living_room_cam
+    - switch.kitchen_light
+    - switch.sony_tv
+    - switch.tv_backlight
+    - switch.aquarium_canister
+    - switch.pi_hole
+    - switch.bath_vent
+    - light.kitchen_main_light
+    - light.livingroomlight
+    - light.living_room_light_2
+    - light.ivancho_room_light 
+
+
+switches2:
+  name: Switches
+  entities:
+    - switch.fish_pump
+    - switch.living_room_cam
+    - switch.sony_tv
+    - switch.tv_backlight
+    - light.kitchen_main_light
+    - light.livingroomlight
+    - light.living_room_light_2
+    - light.ivancho_room_light
+    - switch.wake_on_lan 
+    - switch.pi_hole
+    - switch.kitchen_light
+    - switch.bath_vent
+bitcoins:
+    view: no
+    name: Bitcoins
+    entities:
+    - sensor.exchange_rate_1_btc
+    - sensor.trade_volume
+
+currency:
+  view: yes
+  name: Currency
+  entities:
+    - camera.usd_bgn
+    - group.bitcoins
+
+squeezer:
+    view: no
+    name: Multy Room Audio
+    entities:
+    - media_player.ivanchoroom
+    - media_player.kitchen
+    - media_player.living_room
+    - input_select.radio_select
+    - input_select.spotify_select
+multy-room-audio:
+  view: yes
+  name: Music
+  entities:
+    - group.squeezer
+    - media_player.mpclivingroom
+    - camera.movie_poster
+    - media_player.spotify
+
+cputemperatures:
+  view: no
+  name: ARM CPU Temperatures
+  entities:
+    - sensor.rpi_1_cpu_temp
+    - sensor.rpi3_cpu_temp
+    - sensor.rpi0_ivancho_cpu_temp
+    - sensor.rpi0_kitchen_cpu_temp 
+    - sensor.rpi2_cpu_temp
+    - sensor.rpi0w_cpu_temp
+
+cpuloads:
+  view: no
+  name: ARM CPU Load
+  entities:
+    - sensor.rpi_1_cpu_load
+    - sensor.rpi3_cpu_load
+    - sensor.rpi0_ivancho_cpu
+    - sensor.rpi0_kitchen_cpu
+    - sensor.rpi2_cpu
+    - sensor.rpi0w_cpu_load
+
+diskusage:
+  view: no
+  name: ARM Disk Usage
+  entities:
+    - sensor.rpi_1_diskusage
+    - sensor.rpi3_diskusage
+    - sensor.rpi0_ivancho_diskusage
+    - sensor.rpi0_kitchen_diskusage
+    - sensor.rpi2_diskusage
+    - sensor.rpi0w_diskusage
+
+pccputemperatures:
+  view: no
+  name: x86 Temperatures
+  entities:
+    - sensor.main_pc_cpu_load
+    - sensor.main_pc_cpu_temp
+    - sensor.main_pc_gpu_load
+    - sensor.main_pc_gpu_temp
+    - sensor.kitchen_pc_cpu_load
+    - sensor.kitchen_pc_cpu_temp 
+
+phones:
+  view: no
+  name: Phones
+  entities:
+    - device_tracker.google_maps_108650450444917409685
+    - sensor.tanya_battery
+    - device_tracker.google_maps_118240125134652561295
+    - sensor.hristo_battery
+
+my-devices:
+  view: yes
+  name: My Devices
+  entities:
+    - group.home_pc
+    - group.pihole
+    - group.cputemperatures
+    - group.cpuloads
+    - group.diskusage
+    - group.pccputemperatures 
+    - group.mqtt_srv
+    - sensor.avrg__messages_per_1_min
+
+weather:
+  view: yes
+  name: Weather
+  entities:
+    - group.weather2 
+    - group.airqualitysf
+    - group.airqualitysz
+    - group.weather_overview
+weather2:
+  view: no
+  name: Weather in Sofia
+  entities:
+    - sensor.owm_cloud_coverage
+    - sensor.owm_condition
+    - sensor.owm_humidity
+    - sensor.owm_pressure
+    - sensor.owm_rain
+    - sensor.owm_temperature
+    - sensor.owm_wind_speed
+    - sun.sun 
+    - sensor.moon
+
+home_alarm_group:
+  view: no
+  name: Home Alarm
+  entities:
+    - sensor.home_alarm
+temps:
+  view: no
+  name: Home Temperatures
+  entities:
+    - sensor.kitchen_temp
+    - sensor.kitchen_hum 
+    - sensor.dewpoint
+    - sensor.vent_kitchen
+    - sensor.livingroom_temperature
+    - sensor.livingroom_humidity 
+    - sensor.ivancho_room_temperature
+    - sensor.ivan_room_humidity
+    - sensor.pws_temp_c
+    - sensor.pws_relative_humidity
+    - sensor.pws_dewpoint_c
+ivan_motion:
+  view: no
+  name: Ivancho Room Motion
+  entities:
+    - switch.foscam_motion_ivanchoroom
+    - sensor.ivancho_room_motion
+    
+default_view:
+  view: yes
+  entities:
+    - group.phones
+#    - group.currency
+    - weather.sofia
+    - group.switches
+    - updater.updater
+    # - group.weblinks
+    - group.switches2
+#    - camera.usdbgn
+    - media_player.livingroom
+    - group.home_alarm_group
+    - group.temps
+#    - sensor.hass_db_size
+#    - sensor.hass_log_size
+    # - group.mqtt_srv
+    - automation.burglar_alarm
+    - automation.turn_off_kitchen_lights
+    - automation.turn_on_kitchen_lights
+#    - input_select.pcoptions
+
+catchall:
+  name: Catch All group
+  view: yes
+  icon: mdi:magnify
+  entities:
+   - light.doesnt_exist

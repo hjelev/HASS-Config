@@ -1,0 +1,67 @@
+  - platform: generic
+    living_room:
+    still_image_url: http://192.168.0.108/snapshot.jpg
+    name: Camera Living Room 
+
+  - platform: mjpeg
+    kitchen:
+    mjpeg_url: http://192.168.0.200:8081/video.mjpg
+    name: Kitchen Cam 
+
+  - platform: foscam
+    ivancho:
+    ip: 192.168.0.107
+    name: Ivancho Camera
+    port: 88
+    username: !secret ivancho_cam_user
+    password: !secret ivancho_cam_pass
+
+  - platform: mqtt
+    home-pc:
+    topic: /homepc/snapshot/image/
+    name: home-pc
+
+  - platform: mjpeg
+    ivancho_sz:
+    mjpeg_url: !secret sz_cam_url
+    name: Ivancho SZ
+
+  - platform: local_file
+    living_room_movie:
+    file_path: /ram/movie_data.jpg
+    name: Movie Poster
+
+# camera burgas_dock:
+  # platform: generic
+  # still_image_url: http://83.228.123.116/GetImage.cgi?CH=1
+  # name: Burgas Dock 
+# camera burgas_beach:
+  # platform: generic
+  # still_image_url: http://84.54.180.249:1500/oneshotimage.jpg
+  # name: Burgas Beach 
+# camera varna_street:
+  # platform: generic
+  # still_image_url: http://77.71.2.130:7000/oneshotimage.jpg
+  # name: Varna Street
+#camera vlast_beach:
+#  platform: mjpeg 
+#  mjpeg_url: http://vlas.com/cam/showsingle?cam=1&fr=1 
+#  name: Vlast Beach
+# camera gabrovo_street:
+  # platform: generic
+  # still_image_url: http://www.unicsbg.net/cam1.php
+  # name: Gabrovo Street 
+# camera musala:
+  # platform: mjpeg
+  # mjpeg_url: http://cdn1.webcams.bg:8555/musala.mjpg
+  # name: Musala 
+# camera kiten:
+  # platform: generic
+  # still_image_url: http://cdn1.webcams.bg/cams/kiten_pristanishte.jpg?t=1476042878380
+  # name: Kiten 
+
+# camera usd_bgn:
+  # platform: generic
+  # still_image_url: http://i.dir.bg/live/finance/currency/usd-bgn_s.png
+  # limit_refetch_to_url_change: true
+  # name: USD BGN

@@ -1,0 +1,15 @@
+  - name: Work
+    latitude: 42.682284
+    longitude: 23.314850
+    radius: 120
+    icon: mdi:briefcase
+  - name: Home
+    latitude: !secret home_lat
+    longitude: !secret home_long
+    radius: 100
+    icon: mdi:home
+  - name: Work
+    latitude: 42.627701
+    longitude: 23.374639
+    radius: 100
+    icon: mdi:briefcase

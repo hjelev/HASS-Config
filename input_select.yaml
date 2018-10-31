@@ -1,0 +1,35 @@
+  pcoptions:
+    name: PC Power Options
+    options:
+      - Restart
+      - Shutdown
+      - None
+      - Sleep
+      - Hibernate
+    initial: None
+    icon: mdi:desktop-tower
+  ivancho_cam:
+    name: Move Ivancho Camera
+    options:
+      - Bed
+      - Play
+      - Door
+      - None
+    initial: None
+  radio_select:
+    name: Radio Select
+    options:
+      - None
+      - Jazz FM
+      - Radio Nula
+      - Radio Gaia
+    initial: None
+  spotify_select:
+    name: Spotify Playlists
+    options:
+      - None
+      - Spotify - Red Wine Over Diner
+      - Spotify - Morning Motivation
+      - Spotify - Discover Weekly
+      - Spotify - My Shazam Tracks
+    initial: None
