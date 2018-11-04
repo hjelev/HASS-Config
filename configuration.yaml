@@ -18,6 +18,7 @@ device_tracker: !include devicetracker.yaml
 shell_command: !include shellcommands.yaml
 mqtt: !include mqtt.yaml 
 http:
+  api_password: xyMaSokO123
 sun:
 updater:
 

@@ -40,7 +40,12 @@
         command_state: "curl -X GET 'http://192.168.0.103/admin/api.php?status'"
         value_template: "{{ value_json.status == 'enabled' }}"
         friendly_name: Pi-Hole Ad Blocker
-
+      pi_hole_10m:
+        command_on: "pihole enable"
+        command_off: "pihole disable 20m"
+        command_state: "curl -X GET 'http://192.168.0.103/admin/api.php?status'"
+        value_template: "{{ value_json.status == 'enabled' }}"
+        friendly_name: Pi-Hole Ad Blocker 20m
       # sony_tv:
         # command_on: "echo 'on 0' | sudo cec-client -s -d 1"
         # command_off: "echo 'standby 0' | sudo cec-client -s -d 1"

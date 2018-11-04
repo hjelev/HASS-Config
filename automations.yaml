@@ -7,6 +7,14 @@
   action:
     service: switch.turn_on
     entity_id: group.tvbacklight
+- id: a1
+  alias: Turn off tv backlight
+  trigger:
+  - at: '23:00:00'
+    platform: time
+  action:
+    service: switch.turn_off
+    entity_id: group.tvbacklight
 - id: b
   alias: Turn on kitchen lights
   trigger:
@@ -265,22 +273,22 @@
   action:
   - entity_id: media_player.living_room
     service: media_player.turn_off
-- id: '1540325534689'
-  alias: Start music when movie stops livingroom
-  trigger:
-  - entity_id: media_player.mpclivingroom
-    platform: state
-    to: idle
-  - entity_id: media_player.mpclivingroom
-    platform: state
-    to: paused
-  - entity_id: sensor.steam_game
-    to: None
-    platform: state
-  condition: []
-  action:
-  - entity_id: media_player.living_room
-    service: media_player.turn_on
+# - id: '1540325534689'
+  # alias: Start music when movie stops livingroom
+  # trigger:
+  # - entity_id: media_player.mpclivingroom
+    # platform: state
+    # to: idle
+  # - entity_id: media_player.mpclivingroom
+    # platform: state
+    # to: paused
+  # - entity_id: sensor.steam_game
+    # to: None
+    # platform: state
+  # condition: []
+  # action:
+  # - entity_id: media_player.living_room
+    # service: media_player.turn_on
 - id: '1540315524689'
   alias: Play Jazz FM BG
   trigger:
@@ -329,6 +337,18 @@
       entity_id: media_player.kitchen
       media_content_id: spotify:user:118614068:playlist:55TJGpxwxaBfYiIzKXcRW8
       media_content_type: audio/mp3
+- id: '1240335524629'
+  alias: Play Music for sex
+  trigger:
+  - platform: state
+    entity_id: input_select.spotify_select
+    to: Music for Sex
+  action:
+  - service: media_player.play_media
+    data:
+      entity_id: media_player.kitchen
+      media_content_id: spotify:user:118614068:playlist:2vVXqdiORPT3VHeh1vhSh8
+      media_content_type: audio/mp3
 - id: '1240315524680'
   alias: Play Discover Weekly
   trigger:
@@ -364,6 +384,19 @@
     data:
       entity_id: media_player.kitchen
       media_content_id: spotify:user:118614068:playlist:7vbCvtZKygwnNysoOFAPFv
+      media_content_type: audio/mp3
+- id: '1740317524680'
+  alias: Play Discover Weekly at lunch
+  trigger:
+  trigger:
+  - at: '12:30:00'
+    platform: time
+  condition: []
+  action:
+  - service: media_player.play_media
+    data:
+      entity_id: media_player.kitchen
+      media_content_id: spotify:user:118614068:playlist:37i9dQZEVXcE4eNXPY7TMU
       media_content_type: audio/mp3
 - id: '1540330101460'
   alias: Good Morning Music
@@ -439,3 +472,24 @@
   - service: automation.turn_off
     data:
       entity_id: automation.burglar_alarm
+# - id: '1543937575823'
+  # alias: 'Set HA theme for day and night'
+  # trigger:
+    # - platform: homeassistant
+      # event: start
+    # - platform: state
+      # entity_id: sun.sun
+      # to: above_horizon
+    # - platform: state
+      # entity_id: sun.sun
+      # to: below_horizon
+  # condition: []
+  # action:
+    # - service_template: frontend.set_theme
+      # data_template:
+      # name: >
+        # {% if states.sun.sun.state == "above_horizon" %}
+          # done1
+        # {% else %}
+          # Night
+        # {% endif %}

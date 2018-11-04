@@ -203,6 +203,7 @@ switches:
     - switch.tv_backlight
     - switch.aquarium_canister
     - switch.pi_hole
+    - switch.pi_hole_10m
     - switch.bath_vent
     - light.kitchen_main_light
     - light.livingroomlight
@@ -222,7 +223,7 @@ switches2:
     - light.living_room_light_2
     - light.ivancho_room_light
     - switch.wake_on_lan 
-    - switch.pi_hole
+    - switch.pi_hole_10m
     - switch.kitchen_light
     - switch.bath_vent
 bitcoins:

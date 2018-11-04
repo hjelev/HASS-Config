@@ -13,3 +13,18 @@
     longitude: 23.374639
     radius: 100
     icon: mdi:briefcase
+  - name: Vetren
+    latitude: 42.6100319
+    longitude: 25.6873681
+    radius: 400
+    icon: mdi:home
+  - name: Stara Zagora
+    latitude: 42.422781
+    longitude: 25.6372525
+    radius: 1400
+    icon: mdi:home
+  - name: Kazanlak
+    latitude: 42.6182316
+    longitude: 25.3987803
+    radius: 1400
+    icon: mdi:home

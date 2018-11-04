@@ -86,6 +86,8 @@ switch.bath_vent:
   icon: mdi:fan
 switch.pi_hole:
   icon: mdi:block-helper
+switch.pi_hole_10m:
+  icon: mdi:block-helper
 sensor.tanya_battery:
   icon: mdi:battery
 sensor.hristo_battery:
