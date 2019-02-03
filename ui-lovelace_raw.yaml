@@ -1,0 +1,401 @@
+title: Smart Home Sofia
+views:
+  - icon: 'mdi:home'
+    cards:
+      - title: Tanya & Hristo
+        entities:
+          - entity: device_tracker.google_maps_108650450444917409685
+          - entity: device_tracker.google_maps_118240125134652561295
+        aspect_ratio: '19:8'
+        type: map
+      - entities:
+          - device_tracker.google_maps_108650450444917409685
+          - sensor.tanya_battery
+          - device_tracker.google_maps_118240125134652561295
+          - sensor.hristo_battery
+          - device_tracker.google_maps_102196728965772683906
+        show_name: false
+        type: glance
+      - title: Switches
+        entities:
+          - switch.tv_back_light
+          - light.kitchen_main_light
+          - light.living_room_light
+          - light.living_room_light_2
+          - light.ivancho_room_light
+          - switch.kitchen_light
+          - type: divider
+          - switch.wake_on_lan
+          - switch.wake_on_lan_kitchen
+          - type: divider
+          - switch.pi_hole_10m
+          - switch.bath_vent
+        show_header_toggle: true
+        type: entities
+      - entities:
+          - sensor.home_alarm
+          - automation.burglar_alarm
+          - automation.turn_off_kitchen_lights
+          - automation.turn_on_kitchen_lights
+        show_header_toggle: false
+        type: glance
+      - title: Climate
+        entities:
+          - entity: sensor.kitchen_temp
+          - entity: sensor.kitchen_hum
+          - entity: sensor.dewpoint
+          - entity: sensor.vent_kitchen
+          - type: divider
+          - entity: sensor.livingroom_temperature
+          - entity: sensor.livingroom_humidity
+          - type: divider
+          - entity: sensor.ivancho_room_temperature
+          - entity: sensor.ivan_room_humidity
+          - entity: sensor.mi_airquality
+          - type: divider
+          - entity: sensor.pws_temp_c
+          - entity: sensor.pws_relative_humidity
+          - entity: sensor.pws_dewpoint_c
+        show_header_toggle: false
+        type: entities
+    path: default_view
+    title: default_view
+    badges: []
+  - icon: 'mdi:webcam'
+    cards:
+      - title: Camera Ivancho
+        entities:
+          - input_select.ivancho_cam
+        show_header_toggle: false
+        type: entities
+      - title: Ivancho Room
+        entities:
+          - light.ivancho_room_light
+          - sensor.ivancho_room_temperature
+          - sensor.ivan_room_humidity
+          - sensor.ivancho_room_motion
+          - sensor.mi_airquality
+        camera_image: camera.ivancho_camera
+        type: picture-glance
+      - title: Living Room
+        entities:
+          - light.living_room_light
+          - light.living_room_light_2
+          - sensor.livingroom_temperature
+          - sensor.livingroom_humidity
+        camera_image: camera.camera_living_room
+        type: picture-glance
+      - title: Kitchen
+        entities:
+          - switch.kitchen_light
+          - light.kitchen_main_light
+          - sensor.kitchen_temp
+          - sensor.kitchen_hum
+          - sensor.kitchen_motion
+        camera_image: camera.kitchen_cam
+        type: picture-glance
+      - title: Home PC
+        entities:
+          - sensor.hpc_cpu_temp
+          - sensor.hpc_cpu_usage
+          - switch.wake_on_lan
+        camera_image: camera.home_pc
+        type: picture-glance
+    path: cameras
+    title: Cameras
+    badges: []
+  - icon: 'mdi:cart'
+    cards:
+      - title: Shopping List
+        type: shopping-list
+    path: Shopping-list
+    title: Shopping List
+    badges: []
+  - icon: 'mdi:music'
+    cards:
+      - title: Multy Room Audio
+        entities:
+          - input_select.radio_select
+          - input_select.spotify_select
+        show_header_toggle: false
+        type: entities
+      - entity: media_player.ivanchoroom
+        type: media-control
+      - entity: media_player.kitchen
+        type: media-control
+      - entity: media_player.living_room
+        type: media-control
+      - entity: camera.movie_poster
+        type: picture-entity
+      - entity: media_player.spotify
+        type: media-control
+      - entity: media_player.mpc_living_room
+        type: media-control
+    path: multy_room_audio
+    title: Music
+    badges: []
+  - title: Kitchen
+    cards:
+      - title: Kitchen
+        entities:
+          - switch.kitchen_light
+          - light.kitchen_main_light
+          - sensor.kitchen_temp
+          - sensor.kitchen_hum
+          - sensor.kitchen_motion
+        camera_image: camera.kitchen_cam
+        type: picture-glance
+      - entity: media_player.kitchen
+        type: media-control
+      - entities:
+          - light.kitchen_main_light
+          - switch.kitchen_light
+          - switch.wake_on_lan_kitchen
+          - switch.xiaomi_miio_switch
+          - sensor.mi_power_strip
+        type: glance
+      - graph: line
+        entity: sensor.mi_power_strip
+        unit: W
+        name: Разклонител кухня
+        theme: default
+        detail: 2
+        type: sensor
+      - entity: light.kitchen_main_light
+        type: light
+    path: kitchen
+    badges: []
+  - title: Ivancho Room
+    cards:
+      - title: Ivancho Room
+        entities:
+          - light.ivancho_room_light
+          - sensor.ivancho_room_temperature
+          - sensor.ivan_room_humidity
+          - sensor.ivancho_room_motion
+          - sensor.mi_airquality
+        camera_image: camera.ivancho_camera
+        type: picture-glance
+      - title: Camera Ivancho
+        entities:
+          - input_select.ivancho_cam
+        show_header_toggle: false
+        type: entities
+      - entities:
+          - light.ivancho_room_light
+          - fan.xiaomi_miio_device
+          - switch.foscam_motion_ivanchoroom
+          - sensor.ivancho_room_motion
+        type: glance
+      - title: Air Filter
+        entities:
+          - fan.xiaomi_miio_device
+        show_header_toggle: false
+        type: entities
+      - title: Light
+        entities:
+          - light.ivancho_room_light
+        show_header_toggle: false
+        type: entities
+      - entity: media_player.ivanchoroom
+        type: media-control
+      - entities:
+          - sensor.mi_airquality
+          - sensor.mi_air_fan
+        type: history-graph
+      - graph: line
+        entity: sensor.mi_airquality
+        unit: PM2.5
+        theme: default
+        detail: 2
+        type: sensor
+      - entity: light.ivancho_room_light
+        type: light
+      - max: 100
+        min: 0
+        entity: sensor.mi_airquality
+        unit: PM2.5
+        severity:
+          green: 0
+          red: 80
+          yellow: 50
+        theme: default
+        type: gauge
+    path: ivancho_room
+    badges: []
+  - title: Livingroom
+    cards:
+      - title: Living Room
+        entities:
+          - light.living_room_light
+          - light.living_room_light_2
+          - sensor.livingroom_temperature
+          - sensor.livingroom_humidity
+        camera_image: camera.camera_living_room
+        type: picture-glance
+      - entity: camera.home_pc
+        type: picture-entity
+      - title: Home PC
+        entities:
+          - sensor.hpc_cpu_temp
+          - sensor.hpc_cpu_usage
+          - sensor.hpc_free_memory
+          - sensor.hpc_used_memory
+          - switch.wake_on_lan
+        show_header_toggle: false
+        type: entities
+      - title: Light
+        entities:
+          - light.living_room_light
+          - light.living_room_light_2
+        show_header_toggle: false
+        type: entities
+      - entity: media_player.living_room
+        type: media-control
+      - title: Switch
+        entities:
+          - switch.tv_back_light
+        show_header_toggle: false
+        type: entities
+      - entity: media_player.mpc_living_room
+        type: media-control
+      - entity: light.living_room_light
+        type: light
+      - entity: light.living_room_light_2
+        type: light
+    path: living_room
+    badges: []
+  - icon: 'mdi:dip-switch'
+    cards:
+      - title: Light
+        entities:
+          - light.kitchen_main_light
+          - light.living_room_light
+          - light.living_room_light_2
+          - light.ivancho_room_light
+        type: entities
+      - title: Switch
+        entities:
+          - switch.kitchen_light
+          - switch.tv_back_light
+          - switch.pi_hole
+          - switch.pi_hole_10m
+          - switch.bath_vent
+        type: entities
+    path: switches
+    title: Switches
+    badges: []
+  - icon: 'mdi:currency-btc'
+    cards:
+      - title: Bitcoins
+        entities:
+          - sensor.exchange_rate_1_btc
+          - sensor.trade_volume
+        show_header_toggle: false
+        type: entities
+    path: currency
+    title: Currency
+    badges: []
+  - icon: 'mdi:chip'
+    cards:
+      - title: Home PC
+        entities:
+          - sensor.hpc_cpu_temp
+          - sensor.hpc_cpu_usage
+          - sensor.hpc_free_memory
+          - sensor.hpc_used_memory
+          - switch.wake_on_lan
+        show_header_toggle: false
+        type: entities
+      - entity: camera.home_pc
+        type: picture-entity
+      - title: ARM CPU Temperatures
+        entities:
+          - sensor.rpi_1_cpu_temp
+          - sensor.rpi3_cpu_temp
+          - sensor.rpi0_ivancho_cpu_temp
+          - sensor.rpi0_kitchen_cpu_temp
+          - sensor.rpi2_cpu_temp
+          - sensor.rpi0w_cpu_temp
+        show_header_toggle: false
+        type: entities
+      - title: ARM CPU Load
+        entities:
+          - sensor.rpi_1_cpu_load
+          - sensor.rpi3_cpu_load
+          - sensor.rpi0_ivancho_cpu
+          - sensor.rpi0_kitchen_cpu
+          - sensor.rpi2_cpu
+          - sensor.rpi0w_cpu_load
+        show_header_toggle: false
+        type: entities
+      - title: ARM Disk Usage
+        entities:
+          - sensor.rpi_1_diskusage
+          - sensor.rpi3_diskusage
+          - sensor.rpi0_ivancho_diskusage
+          - sensor.rpi0_kitchen_diskusage
+          - sensor.rpi2_diskusage
+          - sensor.rpi0w_diskusage
+        show_header_toggle: false
+        type: entities
+      - title: x86 Temperatures
+        entities:
+          - sensor.main_pc_cpu_load
+          - sensor.main_pc_cpu_temp
+          - sensor.main_pc_gpu_load
+          - sensor.main_pc_gpu_temp
+          - sensor.kitchen_pc_cpu_load
+          - sensor.kitchen_pc_cpu_temp
+        show_header_toggle: true
+        type: entities
+      - title: mqtt stats
+        entities:
+          - sensor.avrg_messages_per_1_min
+        show_header_toggle: false
+        type: entities
+    path: my_devices
+    title: My Devices
+    badges: []
+  - icon: 'mdi:cloud'
+    cards:
+      - title: Sun and Moon
+        entities:
+          - entity: sun.sun
+          - entity: sensor.moon
+        show_header_toggle: false
+        type: entities
+      - title: Weather overview
+        entities:
+          - entity: sensor.pws_temp_high_record_c
+          - entity: sensor.pws_temp_high_1d_c
+          - entity: sensor.pws_temp_c
+          - entity: sensor.pws_temp_low_1d_c
+          - entity: sensor.pws_temp_low_record_c
+          - entity: sensor.pws_precip_1d
+          - entity: sensor.pws_precip_1d_mm
+          - entity: sensor.pws_wind_kph
+          - entity: sensor.pws_wind_1d_kph
+          - entity: sensor.pws_alerts
+        show_header_toggle: false
+        type: entities
+      - title: Climate Graph
+        entities:
+          - sensor.kitchen_temp
+          - sensor.ivancho_room_temperature
+          - sensor.livingroom_temperature
+          - sensor.pws_temp_c
+          - sensor.kitchen_hum
+          - sensor.ivan_room_humidity
+          - sensor.livingroom_humidity
+          - sensor.pws_relative_humidity
+          - sensor.mi_airquality
+        type: history-graph
+    path: weather
+    title: Weather
+    badges: []
+  - icon: 'mdi:magnify'
+    cards: []
+    path: catchall
+    title: Catch All group
+    badges: []
