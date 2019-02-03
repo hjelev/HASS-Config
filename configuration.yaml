@@ -18,7 +18,7 @@ device_tracker: !include devicetracker.yaml
 shell_command: !include shellcommands.yaml
 mqtt: !include mqtt.yaml 
 http:
-  # api_password: !secret api_pass
+#  api_password: !secret api_pass
 sun:
 updater:
 
@@ -40,7 +40,6 @@ config:
 # discovery: 
 
 fan:
-# Example configuration.yaml entry
   - platform: xiaomi_miio
     host: 192.168.0.16
     token: !secret mi_air_token
