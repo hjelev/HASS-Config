@@ -22,7 +22,12 @@
       - Choose a radio
       - Jazz FM
       - Radio Nula
+      - Radio Nula Office Beatz
       - Radio Gaia
+      - Funky Beat (Netherlands)
+      - Naxi Cafe (Serbia)
+      - Generations Funk
+      - Спокойное Радио (Russia)
     initial: Choose a radio
   spotify_select:
     name: Spotify Playlists
@@ -32,5 +37,7 @@
       - Spotify - Morning Motivation
       - Spotify - Discover Weekly
       - Spotify - My Shazam Tracks
+      - Spotify - Release Radar
       - Music for Sex
+      - Songs for Sleeping
     initial: Choose a playlist

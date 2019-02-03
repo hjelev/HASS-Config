@@ -14,3 +14,11 @@ google_maps_108650450444917409685:
   name: google maps 108650450444917409685
   picture: https://lh5.googleusercontent.com/-63QR7PZNKuk/AAAAAAAAAAI/AAAAAAACZaI/SZcMlTM7_9U/photo.jpg
   track: true
+
+google_maps_102196728965772683906:
+  hide_if_away: false
+  icon:
+  mac:
+  name: google maps 102196728965772683906
+  picture: https://lh3.googleusercontent.com/-soSjJQtfngY/AAAAAAAAAAI/AAAAAAAAACI/uiPGFrRCgRI/photo.jpg
+  track: true

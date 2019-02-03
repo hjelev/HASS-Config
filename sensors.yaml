@@ -4,7 +4,29 @@
     api_key: !secret steam_online_api_key
     accounts:
       - !secret steam_online_acount_masoko
-  # Current Steam game  
+
+  - platform: template
+    sensors:
+      mi_airquality:
+        friendly_name: "Ivancho Room Air"
+        unit_of_measurement: "PM2.5 µg/m³"
+        value_template: "{{ states.fan.xiaomi_miio_device.attributes.aqi }}"
+
+  - platform: template
+    sensors:
+      mi_air_fan:
+        friendly_name: "Ivancho Room Air Fan"
+        unit_of_measurement: "rpm"
+        value_template: "{{ states.fan.xiaomi_miio_device.attributes.motor_speed }}"
+
+  - platform: template
+    sensors:
+      mi_power_strip:
+        friendly_name: "Kitchen Power Strip"
+        unit_of_measurement: "W"
+        value_template: "{{ states.switch.xiaomi_miio_switch.attributes.load_power }}"
+        
+      # Current Steam game  
   - platform: template
     sensors:
       steam_game:
@@ -22,20 +44,16 @@
         friendly_name: "Hristo Phone Battery"
         unit_of_measurement: "%"
         value_template: "{{ states.device_tracker.google_maps_118240125134652561295.attributes.battery_level }}"
-
+        device_class: battery
+        
   - platform: template
     sensors:
       tanya_battery:
         friendly_name: "Tanya Phone Battery"
         unit_of_measurement: "%"
         value_template: "{{ states.device_tracker.google_maps_108650450444917409685.attributes.battery_level }}"
-
-  - platform: gearbest
-    currency: USD
-    items:
-      - url: https://www.gearbest.com/mini-pc/pp_009199662726.html?wid=1433363
-        name: Beelink Gemini X55 Ultimate MINIPC - BLACK EU
-        currency: USD
+        device_class: battery
+        
   - platform: wunderground
     api_key: !secret wunderground_api_key
     monitored_conditions:
@@ -137,21 +155,17 @@
 
   - platform: mqtt
     state_topic: "$SYS/broker/load/publish/received/5min"
-    name: avrg.  messages per 1 min
+    name: avrg_messages_per_1_min
     unit_of_measurement: "msg"
 
   - platform: luftdaten
-    sensorid: 5690
+    sensor_id: 18606
     name: Air Polution Sofia
-    monitored_conditions:
-      - P1
-      - P2
-  - platform: luftdaten
-    sensorid: 6320
-    name: Air Polution SZ
-    monitored_conditions:
-      - P1
-      - P2
+    show_on_map: true
+    sensors:
+      monitored_conditions:
+        - P1
+        - P2
 
   - platform: mqtt
     state_topic: "masoko/rpi1/cpuload"

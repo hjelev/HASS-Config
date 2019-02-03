@@ -9,7 +9,7 @@ homeassistant:
 
 frontend:
   themes: !include_dir_merge_named themes/
-
+shopping_list:
 script: !include scripts.yaml
 group: !include groups.yaml 
 automation: !include automations.yaml
@@ -18,7 +18,7 @@ device_tracker: !include devicetracker.yaml
 shell_command: !include shellcommands.yaml
 mqtt: !include mqtt.yaml 
 http:
-  api_password: xyMaSokO123
+  # api_password: !secret api_pass
 sun:
 updater:
 
@@ -38,6 +38,12 @@ history:
 config:
 
 # discovery: 
+
+fan:
+# Example configuration.yaml entry
+  - platform: xiaomi_miio
+    host: 192.168.0.16
+    token: !secret mi_air_token
 
 input_select: !include input_select.yaml
 

@@ -5,6 +5,12 @@ get_movie_img: 'sudo python3 /home/pi/scripts/dl.py'
 shutdown_z800: 'curl -k http://192.168.0.100:8000/?action=System.Shutdown'
 restart_z800: 'curl -k http://192.168.0.100:8000/?action=System.Restart'
 sleep_z800: 'curl -k http://192.168.0.100:8000/?action=System.Sleep'
+
+shutdown_z801: 'curl -k http://192.168.0.150:8000/?action=System.Shutdown'
+restart_z801: 'curl -k http://192.168.0.150:8000/?action=System.Restart'
+sleep_z801: 'curl -k http://192.168.0.150:8000/?action=System.Sleep'
+hibernate_z801: 'curl -k http://192.168.0.150:8000/?action=System.Hibernate'
+
 hibernate_z800: 'curl -k http://192.168.0.100:8000/?action=System.Hibernate'
 cam_door: !secret cam_door_cmd
 cam_bed: !secret cam_bed_cmd

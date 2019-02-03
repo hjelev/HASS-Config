@@ -28,17 +28,15 @@ group.all_devices:
   icon: mdi:chip
 group.airquality:
   icon: mdi:factory
-# group.remote_cams:
-  # icon: mdi:camcorder
 switch.wake_on_lan:
   friendly_name: Home PC
   icon: mdi:desktop-tower
-sensor.avrg__messages_per_1_min:
+sensor.avrg_messages_per_1_min:
   icon: mdi:message-bulleted
 sensor.ivan_room_humidity:
-  icon: mdi:water-percent
+  device_class: humidity
 sensor.kitchen_hum:
-  icon: mdi:water-percent
+  device_class: humidity
 sensor.livingroom_humidity:
   icon: mdi:water-percent
 group.switches2:
@@ -89,9 +87,9 @@ switch.pi_hole:
 switch.pi_hole_10m:
   icon: mdi:block-helper
 sensor.tanya_battery:
-  icon: mdi:battery
+  device_class: battery
 sensor.hristo_battery:
-  icon: mdi:battery
+  device_class: battery
 sensor.pws_temp_c:
   friendly_name: Outside Temperature
 sensor.dewpoint:
@@ -101,3 +99,12 @@ sensor.dewpoint:
 sensor.vent_kitchen:
   color: red
   icon: mdi:information
+device_tracker.google_maps_102196728965772683906:
+  friendly_name: Google Maps Father
+sensor.livingroom_temperature:
+  device_class: temperature
+sensor.ivancho_room_temperature:
+  device_class: temperature
+switch.wake_on_lan_kitchen:
+  friendly_name: Kitchen Laptop
+  icon: mdi:laptop

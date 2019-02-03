@@ -10,3 +10,8 @@
     recipient:
       - !secret smtp_recipient
     sender_name: My Home Assistant
+
+  - platform: html5
+    name: html5
+    gcm_api_key: !secret gcm_key
+    gcm_sender_id: !secret gcm_senderid

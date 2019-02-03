@@ -1,3 +1,7 @@
+  - platform: xiaomi_miio
+    host: 192.168.0.15
+    token: bb47b9f03d3bb11f19b92675ac74a99c
+    
   - platform: wake_on_lan
     home_pc_wol:
     mac_address: "94-DE-80-B5-F6-DB"
@@ -5,14 +9,21 @@
     turn_off:
       service: shell_command.shutdown_z800
 
+#  - platform: xiaomi_miio
+#    host: 192.168.0.15
+#    token: xAdpBiAgMKaAuvdzioSUwA6khB4
+
+  - platform: wake_on_lan
+    name: "wake on lan kitchen"
+    mac_address: "20-47-47-BA-AC-3B"
+    host: "192.168.0.150"
+    turn_off:
+      service: shell_command.shutdown_z801     
+
   - platform: orvibo
     s20:
     discovery: true
     switches:
-      - host: 192.168.0.104
-        name: "fish pump"
-      - host: 192.168.0.114
-        name: "Kitchen motion light"
       - host: 192.168.0.113
         name: "Kitchen Light"
       - host: 192.168.0.112

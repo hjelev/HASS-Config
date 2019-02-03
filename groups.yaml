@@ -44,11 +44,9 @@ cameras:
   view: yes
   name: Cameras
   entities:
-    - switch.living_room_cam
     - camera.camera_door
     - camera.camera_living_room
     - group.camera_ivancho
-    - camera.ivancho_sz
     - camera.kitchen_cam 
     - camera.home_pc
 
@@ -115,17 +113,20 @@ kitchen:
     - sensor.kitchen_pc_cpu_temp
     - sensor.rpi0_kitchen
     - switch.kitchen_light
+    - switch.wake_on_lan_kitchen
     - light.kitchen_main_light
     - sensor.kitchen_light_status 
     - sensor.kitchen_motion
     - automation.turn_off_kitchen_lights
     - automation.burglar_alarm
+    - switch.xiaomi_miio_switch
+    - sensor.mi_power_strip
 
 mqtt_srv:
 #  view: yes
   name: mqtt stats
   entities:
-    - sensor.avrg__messages_per_1_min
+    - sensor.avrg_messages_per_1_min
 
 ivancho_room:
   view: yes
@@ -138,6 +139,8 @@ ivancho_room:
     - sensor.rpi0_ivancho_cpu_temp
     - light.ivancho_room_light
     - group.ivan_motion
+    - fan.xiaomi_miio_device
+    - sensor.mi_airquality
 
 living_room:
   view: yes
@@ -146,11 +149,6 @@ living_room:
     - group.dht22livingroom
     - media_player.living_room
     - camera.camera_living_room
-    - switch.tv_backlight
-    - switch.fish_pump
-    - switch.living_room_cam
-    - switch.sony_tv
-    - switch.tv_backlight
     - switch.aquarium_canister
     - sensor.rpi2
     - sensor.rpi3_cpu_temp
@@ -159,9 +157,10 @@ living_room:
     - sensor.main_pc_cpu_temp
     - sensor.main_pc_gpu_load
     - sensor.main_pc_gpu_temp
-    - light.livingroomlight
+    - light.living_room_light
     - light.living_room_light_2
     - switch.wake_on_lan 
+    - switch.tv_back_light
     - sensor.livingroom_motion
     - sensor.livingroom_cam_motion
     - group.flower1
@@ -182,7 +181,7 @@ home_pc:
 tvbacklight:
   name: Living Room Light
   entities:
-    - switch.tv_backlight 
+    - switch.tv_back_light 
 
 weblinks:
   name: Links
@@ -196,17 +195,13 @@ switches:
   view: yes
   name: Switches
   entities:
-    - switch.fish_pump
-    - switch.living_room_cam
     - switch.kitchen_light
-    - switch.sony_tv
-    - switch.tv_backlight
-    - switch.aquarium_canister
+    - switch.tv_back_light
     - switch.pi_hole
     - switch.pi_hole_10m
     - switch.bath_vent
     - light.kitchen_main_light
-    - light.livingroomlight
+    - light.living_room_light
     - light.living_room_light_2
     - light.ivancho_room_light 
 
@@ -214,15 +209,13 @@ switches:
 switches2:
   name: Switches
   entities:
-    - switch.fish_pump
-    - switch.living_room_cam
-    - switch.sony_tv
-    - switch.tv_backlight
+    - switch.tv_back_light
     - light.kitchen_main_light
-    - light.livingroomlight
+    - light.living_room_light
     - light.living_room_light_2
     - light.ivancho_room_light
-    - switch.wake_on_lan 
+    - switch.wake_on_lan
+    - switch.wake_on_lan_kitchen
     - switch.pi_hole_10m
     - switch.kitchen_light
     - switch.bath_vent
@@ -310,7 +303,7 @@ phones:
     - sensor.tanya_battery
     - device_tracker.google_maps_118240125134652561295
     - sensor.hristo_battery
-
+    - device_tracker.google_maps_102196728965772683906
 my-devices:
   view: yes
   name: My Devices
@@ -322,7 +315,7 @@ my-devices:
     - group.diskusage
     - group.pccputemperatures 
     - group.mqtt_srv
-    - sensor.avrg__messages_per_1_min
+    - sensor.avrg_messages_per_1_min
 
 weather:
   view: yes

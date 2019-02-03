@@ -1,4 +1,5 @@
-- id: a
+- id: '1521022835731'
+  initial_state: true
   alias: Turn on tv backlight when sun sets
   trigger:
     platform: sun
@@ -7,7 +8,8 @@
   action:
     service: switch.turn_on
     entity_id: group.tvbacklight
-- id: a1
+- id: '1521022835732'
+  initial_state: true
   alias: Turn off tv backlight
   trigger:
   - at: '23:00:00'
@@ -15,7 +17,8 @@
   action:
     service: switch.turn_off
     entity_id: group.tvbacklight
-- id: b
+- id: '1521022835733'
+  initial_state: true
   alias: Turn on kitchen lights
   trigger:
     platform: mqtt
@@ -32,7 +35,8 @@
     data:
       entity_id: light.kitchen_main_light
       transition: 2
-- id: b1
+- id: '1521022835734'
+  initial_state: true
   alias: Turn on kitchen lights after midnight
   trigger:
     platform: mqtt
@@ -49,7 +53,8 @@
     data:
       entity_id: light.kitchen_main_light
       transition: 2
-- id: c
+- id: '1521022835735'
+  initial_state: true
   alias: Turn off kitchen lights
   trigger:
     platform: mqtt
@@ -64,7 +69,8 @@
   action:
   - service: switch.turn_off
     entity_id: switch.kitchen_light
-- id: d
+- id: '1521022835736'
+  initial_state: false
   alias: Burglar Alarm
   trigger:
   - payload: '1'
@@ -87,7 +93,7 @@
         - /ram/ivancho.jpg
       message: Intruder alert at kitchen!!
       title: Intruder alert
-    service: notify.NOTIFIER_NAME
+    service: notify.html5
   - entity_id: switch.kitchen_light
     service: switch.turn_on
 - action:
@@ -105,6 +111,7 @@
   alias: Auto Photo Alarm Arm ON
   condition: []
   id: '1512730024376'
+  initial_state: true
   trigger:
   - entity_id: sensor.home_alarm
     from: 'Off'
@@ -125,19 +132,22 @@
   alias: Auto Photo Alarm Arm OFF
   condition: []
   id: '1512730388127'
+  initial_state: true
   trigger:
   - entity_id: sensor.home_alarm
     from: 'On'
     platform: state
     to: 'Off'
-- id: e
+- id: '1521022835740'
+  initial_state: true
   alias: Movie Poster
   trigger:
   - platform: state
     entity_id: media_player.mpclivingroom
   action:
   - service: shell_command.get_movie_img
-- id: f
+- id: '1521022835741'
+  initial_state: true
   alias: z800_restart
   trigger:
   - platform: state
@@ -145,7 +155,8 @@
     to: Restart
   action:
   - service: shell_command.restart_z800
-- id: f1
+- id: '1221022835741'
+  initial_state: true
   alias: z800_shutdown
   trigger:
   - platform: state
@@ -153,7 +164,7 @@
     to: Shutdown
   action:
   - service: shell_command.shutdown_z800
-- id: f2
+- id: '1521022835743'
   alias: z800_sleep
   trigger:
   - platform: state
@@ -161,7 +172,8 @@
     to: Sleep
   action:
   - service: shell_command.sleep_z800
-- id: f3
+- id: '1521022835744'
+  initial_state: true
   alias: z800_hibernate
   trigger:
   - platform: state
@@ -169,7 +181,8 @@
     to: Hibernate
   action:
   - service: shell_command.hibernate_z800
-- id: f4
+- id: '1521022835745'
+  initial_state: true
   alias: cam_bed
   trigger:
   - platform: state
@@ -177,7 +190,8 @@
     to: Bed
   action:
   - service: shell_command.cam_bed
-- id: f5
+- id: '1521022835746'
+  initial_state: true
   alias: cam_door
   trigger:
   - platform: state
@@ -185,7 +199,8 @@
     to: Door
   action:
   - service: shell_command.cam_door
-- id: f6
+- id: '1521022835747'
+  initial_state: true
   alias: cam_play
   trigger:
   - platform: state
@@ -201,6 +216,7 @@
     entity_id: sensor.home_alarm
     state: 'Off'
   id: '1521022835738'
+  initial_state: true
   trigger:
   - event: sunset
     offset: 03:30:00
@@ -213,6 +229,7 @@
     entity_id: sensor.home_alarm
     state: 'Off'
   id: '1521023478419'
+  initial_state: true
   trigger:
   - event: sunrise
     offset: 01:00:00
@@ -224,6 +241,7 @@
   - after: sunset
     condition: sun
   id: '1521033428239'
+  initial_state: true
   trigger:
   - entity_id: light.ivancho_room_light
     platform: state
@@ -233,11 +251,13 @@
   alias: Ivancho Cam - light on
   condition: []
   id: '1521033566528'
+  initial_state: true
   trigger:
   - entity_id: light.ivancho_room_light
     platform: state
     to: 'on'
 - id: '1539943397383'
+  initial_state: true
   alias: bath_vent_auto_on
   trigger:
   - entity_id: binary_sensor.ping_binary_sensor
@@ -245,22 +265,24 @@
     platform: state
     to: 'on'
   condition:
-  - after: '6:00'
+  - after: '6:30'
     before: '22:00'
     condition: time
   action:
   - service: shell_command.bath_vent_on
 - id: '1540024316569'
+  initial_state: true
   alias: Turn off Bath Vent
   trigger:
   - platform: state
     entity_id: switch.bath_vent
     to: 'on'
     for:
-      minutes: '90'
+      minutes: '150'
   action:
   - service: shell_command.bath_vent_off
 - id: '1540325534681'
+  initial_state: true
   alias: Stop music when movie starts livingroom
   trigger:
   - entity_id: media_player.mpclivingroom
@@ -289,7 +311,47 @@
   # action:
   # - entity_id: media_player.living_room
     # service: media_player.turn_on
+- id: '3240316142639'
+  initial_state: true
+  alias: Спокойное Радио (Russia)
+  trigger:
+  - platform: state
+    entity_id: input_select.radio_select
+    to: Спокойное Радио (Russia)
+  action:
+  - service: media_player.play_media
+    data:
+      entity_id: media_player.kitchen
+      media_content_id: https://listen1.myradio24.com/6262
+      media_content_type: audio/mp3  
+- id: '2540316144639'
+  initial_state: true
+  alias: Play Generations Funk
+  trigger:
+  - platform: state
+    entity_id: input_select.radio_select
+    to: Generations Funk
+  action:
+  - service: media_player.play_media
+    data:
+      entity_id: media_player.kitchen
+      media_content_id: http://gene-wr05.ice.infomaniak.ch/gene-wr05.mp3
+      media_content_type: audio/mp3
+- id: '1540215124649'
+  initial_state: true
+  alias: Play Naxi Cafe (Serbia)
+  trigger:
+  - platform: state
+    entity_id: input_select.radio_select
+    to: Naxi Cafe (Serbia)
+  action:
+  - service: media_player.play_media
+    data:
+      entity_id: media_player.kitchen
+      media_content_id: http://naxidigital-cafe128.streaming.rs:8020/listen.pls
+      media_content_type: audio/mp3
 - id: '1540315524689'
+  initial_state: true
   alias: Play Jazz FM BG
   trigger:
   - platform: state
@@ -301,7 +363,21 @@
       entity_id: media_player.kitchen
       media_content_id: http://live.btvradio.bg/jazz-fm.mp3
       media_content_type: audio/mp3
-- id: '1540315524689'
+- id: '2540312524689'
+  initial_state: true
+  alias: Funky Beat (Netherlands)
+  trigger:
+  - platform: state
+    entity_id: input_select.radio_select
+    to: Funky Beat (Netherlands)
+  action:
+  - service: media_player.play_media
+    data:
+      entity_id: media_player.kitchen
+      media_content_id: http://caster04.streampakket.com:2199/tunein/funkybea.pls
+      media_content_type: audio/mp3
+- id: '1540115524689'
+  initial_state: true
   alias: Play Radio Nula
   trigger:
   - platform: state
@@ -313,7 +389,21 @@
       entity_id: media_player.kitchen
       media_content_id: http://streaming.radionula.com:8800/classics
       media_content_type: audio/mp3
+- id: '12240315524689'
+  initial_state: true
+  alias: Play Radio Nula Lounge
+  trigger:
+  - platform: state
+    entity_id: input_select.radio_select
+    to: Radio Nula Office Beatz
+  action:
+  - service: media_player.play_media
+    data:
+      entity_id: media_player.kitchen
+      media_content_id: http://streaming.radionula.com:8800/lounge
+      media_content_type: audio/mp3
 - id: '1540315524689'
+  initial_state: true
   alias: Play Radio Gaia
   trigger:
   - platform: state
@@ -326,6 +416,7 @@
       media_content_id: http://sc-radiogaia.1.fm:10036
       media_content_type: audio/mp3
 - id: '1240315524689'
+  initial_state: true
   alias: Play Red Wine Over Diner
   trigger:
   - platform: state
@@ -337,7 +428,36 @@
       entity_id: media_player.kitchen
       media_content_id: spotify:user:118614068:playlist:55TJGpxwxaBfYiIzKXcRW8
       media_content_type: audio/mp3
+
+- id: '1210335524629'
+  initial_state: true
+  alias: Play Release Radar
+  trigger:
+  - platform: state
+    entity_id: input_select.spotify_select
+    to: Spotify - Release Radar
+  action:
+  - service: media_player.play_media
+    data:
+      entity_id: media_player.kitchen
+      media_content_id: spotify:user:118614068:playlist:37i9dQZEVXbq2YOJxmaMML
+      media_content_type: audio/mp3
+
+- id: '12303133224689'
+  initial_state: true
+  alias: Play Songs for Sleeping
+  trigger:
+  - platform: state
+    entity_id: input_select.spotify_select
+    to: Songs for Sleeping
+  action:
+  - service: media_player.play_media
+    data:
+      entity_id: media_player.kitchen
+      media_content_id: spotify:user:118614068:playlist:37i9dQZF1DWStLt4f1zJ6I
+      media_content_type: audio/mp3
 - id: '1240335524629'
+  initial_state: true
   alias: Play Music for sex
   trigger:
   - platform: state
@@ -350,6 +470,7 @@
       media_content_id: spotify:user:118614068:playlist:2vVXqdiORPT3VHeh1vhSh8
       media_content_type: audio/mp3
 - id: '1240315524680'
+  initial_state: true
   alias: Play Discover Weekly
   trigger:
   - platform: state
@@ -361,7 +482,8 @@
       entity_id: media_player.kitchen
       media_content_id: spotify:user:118614068:playlist:37i9dQZEVXcE4eNXPY7TMU
       media_content_type: audio/mp3
-- id: '1240315524680'
+- id: '1243315524680'
+  initial_state: true
   alias: Play Morning Motivation
   trigger:
   - platform: state
@@ -374,6 +496,7 @@
       media_content_id: spotify:user:118614068:playlist:37i9dQZF1DXc5e2bJhV6pu
       media_content_type: audio/mp3
 - id: '1240215524680'
+  initial_state: true
   alias: Play My Shazam Tracks
   trigger:
   - platform: state
@@ -386,8 +509,8 @@
       media_content_id: spotify:user:118614068:playlist:7vbCvtZKygwnNysoOFAPFv
       media_content_type: audio/mp3
 - id: '1740317524680'
+  initial_state: true
   alias: Play Discover Weekly at lunch
-  trigger:
   trigger:
   - at: '12:30:00'
     platform: time
@@ -399,21 +522,23 @@
       media_content_id: spotify:user:118614068:playlist:37i9dQZEVXcE4eNXPY7TMU
       media_content_type: audio/mp3
 - id: '1540330101460'
+  initial_state: true
   alias: Good Morning Music
   trigger:
-  - at: 07:30
+  - at: '07:30:00'
     platform: time
   condition: []
   action:
   - data:
       entity_id: media_player.kitchen
-      media_content_id: spotify:user:118614068:playlist:37i9dQZF1DXc5e2bJhV6pu
+      media_content_id: spotify:user:118614068:playlist:37i9dQZEVXbq2YOJxmaMML
       media_content_type: audio/mp3
     service: media_player.play_media
 - id: '1140331101460'
-  alias: Dinner Music
+  initial_state: true
+  alias: Back from work Music
   trigger:
-  - at: '19:30:00'
+  - at: '17:30:00'
     platform: time
   condition: []
   action:
@@ -422,7 +547,24 @@
       media_content_id: spotify:user:118614068:playlist:55TJGpxwxaBfYiIzKXcRW8
       media_content_type: audio/mp3
     service: media_player.play_media
+
+- id: '1141331101461'
+  initial_state: true
+  alias: Dinner Music
+  trigger:
+  - at: '19:30:00'
+    platform: time
+  condition: []
+  action:
+  - service: media_player.play_media
+    data:
+      entity_id: media_player.kitchen
+      media_content_id: http://sc-radiogaia.1.fm:10036
+      media_content_type: audio/mp3  
+    service: media_player.play_media
+
 - id: '1541330101461'
+  initial_state: true
   alias: Good Night Music
   trigger:
   - at: 00:00
@@ -435,6 +577,7 @@
       media_content_type: audio/mp3
     service: media_player.play_media
 - id: '1243430101461'
+  initial_state: true
   alias: Get Ungrouped Entities On Start
   hide_entity: true
   trigger:
@@ -446,6 +589,7 @@
       domains_to_ignore: zone,group,automation,zwave
       target_group: group.catchall
 - id: '1540558116811'
+  initial_state: true
   alias: Turn off bath vent switch when power off
   trigger:
   - entity_id: binary_sensor.ping_binary_sensor
@@ -460,6 +604,7 @@
       payload: '0'
       retain: true
 - id: '1540937575881'
+  initial_state: true
   alias: Hass Start Alarm State
   trigger:
   - event: start
